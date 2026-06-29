@@ -17,7 +17,17 @@
 #include "../common/Options.hpp"
 #include "../portability/NumaTopo.hpp"
 #include "../portability/OS.hpp"
-#include "linux/mempolicy.h"
+//#include "linux/mempolicy.h"
+const int MPOL_DEFAULT = 0;
+const int MPOL_BIND = 1;
+const int MPOL_INTERLEAVE = 2;
+const int MPOL_PREFERRED = 3;
+const int MPOL_LOCAL = 4;
+
+const int MPOL_F_NODE = 1 << 0;
+const int MPOL_F_ADDR = 1 << 1;
+const int MPOL_MF_MOVE = 1 << 2;
+const int MPOL_MF_MOVE_ALL = 1 << 3;
 #ifdef __PIN__
 	#include "../../extern-deps/from-numactl/MovePages.hpp"
 #else

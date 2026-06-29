@@ -10,7 +10,7 @@
 #include <cassert>
 #include <dlfcn.h>
 #include <cstdlib>
-#include <execinfo.h>
+//#include <execinfo.h>
 #include <cstring>
 #include <cstdio>
 #include <iostream>
@@ -20,7 +20,7 @@
 //unix
 #ifndef __PIN__
 	#include <dlfcn.h>
-	#include <execinfo.h>
+//	#include <execinfo.h>
 	#include <link.h>
 #endif //__PIN__
 //#include <common/Array.hpp>
@@ -80,6 +80,9 @@ const char* SymbolRegistry::setupNewEntry(void* callSite)
 {
 	//errors
 	assert(callSite != NULL);
+	abort();
+	return nullptr;
+	/*
 
 	//use backtrace_symbol to extract name and line
 	char ** tmp = backtrace_symbols(&callSite,1);
@@ -94,6 +97,7 @@ const char* SymbolRegistry::setupNewEntry(void* callSite)
 
 	//ok return
 	return res;
+	*/
 }
 
 /*******************  FUNCTION  *********************/
@@ -484,7 +488,7 @@ void SymbolRegistry::solveMissings(void)
 	for (std::vector<void*>::iterator it = toResolve.begin() ; it != toResolve.end() ; ++it)
 		buffer[i++] = *it;
 	
-	char ** res = backtrace_symbols(buffer,toResolve.size());
+	/*char ** res = backtrace_symbols(buffer,toResolve.size());
 	delete [] buffer;
 	if (res != NULL)
 	{
@@ -493,7 +497,7 @@ void SymbolRegistry::solveMissings(void)
 			if (it->second.function == -1 || getString(it->second.function) == "??")
 				it->second.function = getString(extractSymbolName(res[i++]));
 		free(res);
-	}
+	}*/
 }
 
 /*******************  FUNCTION  *********************/

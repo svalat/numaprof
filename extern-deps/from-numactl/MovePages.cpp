@@ -5,7 +5,7 @@
 
 #include <unistd.h>
 #include <sys/types.h>
-#include <asm/unistd.h>
+//#include <asm/unistd.h>
 #include <errno.h>
 #include <cstdio>
 #include <sys/syscall.h> 

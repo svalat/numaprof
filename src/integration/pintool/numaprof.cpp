@@ -5,7 +5,6 @@
              AUTHOR   : Valat Sébastien - CERN
              LICENSE  : CeCILL-C
 *****************************************************/
-
 #include "pin.H"
 #include <cstring>
 #include <sys/mman.h>

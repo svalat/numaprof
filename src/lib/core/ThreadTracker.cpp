@@ -14,7 +14,23 @@
 #include "../portability/OS.hpp"
 #include "../common/Options.hpp"
 #include "../caches/CpuCacheBuilder.hpp"
-#include "linux/mempolicy.h"
+//#include "linux/mempolicy.h"
+
+// --- Constantes pour les modes de politique de mémoire (MPOL_*) ---
+// Ces valeurs sont standardisées dans le noyau Linux et ne changent pas.
+const int MPOL_DEFAULT = 0;       // Politique par défaut
+const int MPOL_PREFERRED = 1;     // Préférer un nœud (obsolète, remplacé par MPOL_PREFERRED_MANY)
+const int MPOL_BIND = 2;          // Lier à un ensemble de nœuds
+const int MPOL_INTERLEAVE = 3;    // Répartir entre les nœuds
+const int MPOL_LOCAL = 4;         // Allouer localement (nœud du CPU actuel)
+const int MPOL_PREFERRED_MANY = 5; // Préférer plusieurs nœuds (ajouté plus tard)
+
+// --- Constantes pour les flags de move_pages et get_mempolicy ---
+const int MPOL_F_NODE = (1 << 0);   // Récupérer le nœud pour une adresse
+const int MPOL_F_ADDR = (1 << 1);   // Utiliser l'adresse spécifiée
+const int MPOL_MF_MOVE = (1 << 2);  // Déplacer les pages
+const int MPOL_MF_MOVE_ALL = (1 << 3); // Déplacer toutes les pages, même si déjà sur le bon nœud
+const int MPOL_MF_STRICT = (1 << 4);  // Échouer si une page ne peut pas être déplacée
 
 /*******************  NAMESPACE  ********************/
 namespace numaprof

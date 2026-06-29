@@ -17,6 +17,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <libgen.h>
 #ifdef __PIN__
 	#include "../../extern-deps/from-numactl/MovePages.hpp"
 #else
@@ -33,10 +34,12 @@ namespace numaprof
 /********************  MACROS  **********************/
 //weird thing :(
 #ifndef gettid
-	#define gettid() syscall(__NR_gettid)
+	#define gettid() syscall(SYS_gettid)
 #endif
 #define HUGE_PAGE_SIZE (2*1024*1024)
-#define PAGE_SIZE 4096
+#ifndef PAGE_SIZE
+	#define PAGE_SIZE 4096
+#endif //PAGE_SIZE
 #define HUGE_PAGE_SUB_PAGES (HUGE_PAGE_SIZE / PAGE_SIZE)
 
 /********************  GLOBALS  *********************/
